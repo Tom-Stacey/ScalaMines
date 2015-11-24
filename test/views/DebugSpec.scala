@@ -10,7 +10,7 @@ import java.util.Date
   */
 class DebugSpec extends FlatSpec with Matchers{
 
-  def testDebug {
+  def testDebug: Unit = {
 
     lazy val html = views.html.debug()
 
