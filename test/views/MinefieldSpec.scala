@@ -14,12 +14,19 @@ class MinefieldSpec extends FlatSpec with Matchers{
 
     lazy val html = views.html.minefield()
 
-    "The minefield view" should "rander an html page" in{
+    "The minefield view" should "render an html page" in{
       running(new FakeApplication()){
         contentType(html) should be ("text/html")
       }
     }
-  }
 
+    it should "include a table" in {
+      running(new FakeApplication()) {
+        contentAsString(html) should include("<table>")
+        contentAsString(html) should include("</table>")
+      }
+    }
+
+  }
   testMinefield
 }
