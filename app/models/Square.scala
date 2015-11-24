@@ -12,7 +12,8 @@ case class Square(containsMine:Boolean, flagged:Boolean, clicked:Boolean, surrou
     * returns the number of mines in the square
     */
   def mineCount():Int = {
-    if(containsMine) 1 else 0
+    if (containsMine) 1 else 0
   }
 
-}
+
+  }
