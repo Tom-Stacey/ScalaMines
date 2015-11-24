@@ -1,29 +1,16 @@
-@()
+@(rows: Int, cols: Int)
 @main("Minesweeper"){
     <table class="table table-bordered table-hover">
-        <tr>
-            <td>
-                <form>
-                    <input type="submit" value="Test Cell" class="form-control" style="width:100%; height:100%">
-                </form>
-            </td>
-            <td>
-                <form>
-                    <input type="submit" value="Test Cell" class="form-control" style="width:100%; height:100%">
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form>
-                    <input type="submit" value="Test Cell" class="form-control" style="width:100%; height:100%">
-                </form>
-            </td>
-            <td>
-                <form>
-                    <input type="submit" value="Test Cell" class="form-control" style="width:100%; height:100%">
-                </form>
-            </td>
-        </tr>
+        @for(i <- 1 to rows){
+            <tr id="@i">
+                @for(i <- 1 to cols){
+                <td id="@i">
+                    <form>
+                        <input type="submit" value="Test Cell" class="form-control" style="width:100%; height:100%">
+                    </form>
+                </td>
+                }
+            </tr>
+        }
     </table>
 }

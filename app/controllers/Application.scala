@@ -21,6 +21,6 @@ class Application extends Controller {
     * @return
     */
   def minesTest = Action {
-    Ok(views.html.minefield())
+    Ok(views.html.minefield(5,10))
   }
 }

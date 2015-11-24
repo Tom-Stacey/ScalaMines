@@ -12,7 +12,9 @@ class MinefieldSpec extends FlatSpec with Matchers{
 
   def testMinefield: Unit ={
 
-    lazy val html = views.html.minefield()
+    val rows = 5
+    val cols = 10
+    lazy val html = views.html.minefield(rows,cols)
 
     "The minefield view" should "render an html page" in{
       new FakeApplication(){
@@ -31,8 +33,14 @@ class MinefieldSpec extends FlatSpec with Matchers{
       contentAsString(html) should include("<table class=\"table table-bordered table-hover\">")
     }
 
-    it should "have at least one table cell" in {
-      contentAsString(html) should include ("<td>")
+    it should "have at given number of table rows" in {
+      contentAsString(html) should include ("<tr id=\"1\">")
+      contentAsString(html) should include ("<tr id=\"" +rows+ "\">")
+    }
+
+    it should "have a given number of table cells per row" in {
+      contentAsString(html) should include ("<td id=\"1\">")
+      contentAsString(html) should include ("<td id=\"" +cols+ "\">")
     }
 
   }
