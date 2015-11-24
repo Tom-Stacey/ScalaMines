@@ -111,8 +111,8 @@ class MineSweeperGrid(rows:Int, cols:Int, numberOfMines:Int) {
     * returns true if the space contains a mine, false if not
     */
   def click(row:Int, col:Int):Boolean = {
-    if(!grid(row)(col).clicked && boundaryCheck(row, col)) {
-      grid(row)(col).copy(clicked = true)
+    if(!grid(row)(col).clicked && !grid(row)(col).flagged && boundaryCheck(row, col)) {
+      grid(row)(col) = grid(row)(col).copy(clicked = true)
       if(grid(row)(col).containsMine) {
         true
       } else {

@@ -1,23 +1,20 @@
 import models.{Square, StateOfPlay}
-import org.specs2.mutable._
-import org.specs2.runner._
-import org.junit.runner._
+import org.scalatest.{Matchers, FlatSpec}
 
-import play.api.test._
-import play.api.test.Helpers._
 
-/**
-  * Add your spec here.
-  * You can mock out a whole application including requests, plugins etc.
-  * For more information, consult the wiki.
-  */
-@RunWith(classOf[JUnitRunner])
-class StateOfPlayTest extends Specification {
+class StateOfPlayTest extends FlatSpec with Matchers  {
 
-  "The StateOfPlay class" should {"return the basic square picture location for an unclicked square" in {
+  "The StateOfPlay class" should "return the basic square picture location for an unclicked square" in {
       val stateOfPlay = new StateOfPlay()
       val unclickedSquare = new Square(true, false, false, Option(3))
     stateOfPlay.getSquareImageName(unclickedSquare) should be ("tile.png")
-    }
   }
+
+  it should "return the correct number of surrounding mines for a clicked, unflagged square with four mines around" in {
+    val stateOfPlay = new StateOfPlay()
+    val unclickedSquare = new Square(false, false, true, Option(4))
+    stateOfPlay.getSquareImageName(unclickedSquare) should be ("four.png")
+  }
+
+  // Square constructor - (containsMine:Boolean, flagged:Boolean, clicked:Boolean, surroundingMines:Option[Int])
 }
