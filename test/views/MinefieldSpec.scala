@@ -21,10 +21,12 @@ class MinefieldSpec extends FlatSpec with Matchers{
     }
 
     it should "include a table" in {
-      running(new FakeApplication()) {
-        contentAsString(html) should include("<table>")
-        contentAsString(html) should include("</table>")
-      }
+      contentAsString(html) should include("<table>")
+      contentAsString(html) should include("</table>")
+    }
+
+    it should "be embedded in the main view with title \"Minesweeper\" " in {
+      contentAsString(html) should include("@main(\"Minesweeper\")")
     }
 
   }

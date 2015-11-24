@@ -15,4 +15,12 @@ class Application extends Controller {
   def sayHi = Action {
     Ok(views.html.sayHi())
   }
+
+  /**
+    * Test method for minesweeper page
+    * @return
+    */
+  def minesTest = Action {
+    Ok(views.html.minefield())
+  }
 }
