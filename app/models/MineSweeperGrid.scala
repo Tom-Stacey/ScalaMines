@@ -1,6 +1,8 @@
 package models
 
+import scala.annotation.tailrec
 import scala.util.Random
+
 /**
   * @author tstacey
   */
@@ -14,8 +16,12 @@ class MineSweeperGrid(rows:Int, cols:Int, numberOfMines:Int) {
     grid;
   }
 
+  /**
+    * places mines in random positions on the grid
+    */
   def placeMines():Unit = {
 
+    @tailrec
     def loop(minesPlaced:Int):Unit = {
       val rowCoord = Random.nextInt(rows)
       val colCoord = Random.nextInt(cols)
@@ -37,6 +43,7 @@ class MineSweeperGrid(rows:Int, cols:Int, numberOfMines:Int) {
     */
   def setSurroundingValues():Unit = {
 
+    @tailrec
     def loop(row:Int, col:Int):Unit = {
       grid(row)(col) = grid(row)(col).copy(surroundingMines = Option(calculateSurroundingMines(row, col)))
       if(row == rows.-(1) && col == cols.-(1)) {
@@ -59,6 +66,7 @@ class MineSweeperGrid(rows:Int, cols:Int, numberOfMines:Int) {
     */
   private def calculateSurroundingMines(row:Int, col:Int):Int = {
 
+    @tailrec
     def loop(currentRow:Int, currentCol:Int, total:Int):Int = {
       if(currentRow == row.+(1) && currentCol == col.+(1)) {
         if(!boundaryCheck(currentRow,currentCol)) {
@@ -68,13 +76,13 @@ class MineSweeperGrid(rows:Int, cols:Int, numberOfMines:Int) {
         }
       } else {
         if(currentCol < col.+(1)) {
-          if(boundaryCheck(currentRow,currentCol)) {
+          if(!boundaryCheck(currentRow,currentCol)) {
             loop(currentRow, currentCol.+(1), total)
           } else {
             loop(currentRow, currentCol.+(1), total.+(grid(currentRow)(currentCol).mineCount()))
           }
         } else {
-          if(boundaryCheck(currentRow,currentCol)) {
+          if(!boundaryCheck(currentRow,currentCol)) {
             loop(currentRow.+(1), col.-(1), total)
           } else {
             loop(currentRow.+(1), col.-(1), total.+(grid(currentRow)(currentCol).mineCount()))
@@ -124,6 +132,8 @@ class MineSweeperGrid(rows:Int, cols:Int, numberOfMines:Int) {
     * @param col
     */
   def clickAround(row:Int, col:Int) {
+
+    @tailrec
     def loop(currentRow:Int, currentCol:Int):Unit = {
       click(currentRow, currentCol)
       if(currentRow == row.+(1) && currentCol == col.+(1)) {
