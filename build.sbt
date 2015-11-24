@@ -10,7 +10,9 @@ libraryDependencies ++= Seq(
   jdbc,
   cache,
   ws,
-  specs2 % Test
+  specs2 % Test,
+  "com.adrianhurt" %% "play-bootstrap3" % "0.4.5-P24",
+  "org.scalatest" % "scalatest_2.11" % "2.2.4" % "test"
 )
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
