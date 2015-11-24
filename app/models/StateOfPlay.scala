@@ -17,7 +17,7 @@ class StateOfPlay {
   val unclickedImageLoc = "tile.png"
   val mineExposedImageLoc = "mine.png"
 
-  def getSquareImage(square: Square): String = {
+  def getSquareImageName(square: Square): String = {
     if(square.flagged) {
       flaggedImageLoc
     } else if (!square.clicked) {
