@@ -11,3 +11,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 #Mines parts
 GET /MinesEntry                     controllers.Application.entry
 GET /MinesHi                        controllers.Application.sayHi
+
+#MinesweeperTest
+
+GET     /minesTest                  controllers.Application.minesTest
