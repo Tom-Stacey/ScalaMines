@@ -15,20 +15,27 @@ class MinefieldSpec extends FlatSpec with Matchers{
     lazy val html = views.html.minefield()
 
     "The minefield view" should "render an html page" in{
-      running(new FakeApplication()){
+      new FakeApplication(){
         contentType(html) should be ("text/html")
       }
     }
 
-    it should "include a table" in {
-      contentAsString(html) should include("<table>")
-      contentAsString(html) should include("</table>")
+    it should "be embedded in the main view with title \"Minesweeper\" " in {
+      new FakeApplication() {
+        contentAsString(html) should include("<title>Minesweeper</title>")
+
+      }
     }
 
-    it should "be embedded in the main view with title \"Minesweeper\" " in {
-      contentAsString(html) should include("@main(\"Minesweeper\")")
+    it should "include a table" in {
+      contentAsString(html) should include("<table class=\"table table-bordered table-hover\">")
+    }
+
+    it should "have at least one table cell" in {
+      contentAsString(html) should include ("<td>")
     }
 
   }
+
   testMinefield
 }
