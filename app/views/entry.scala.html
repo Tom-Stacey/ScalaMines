@@ -1,0 +1,13 @@
+@(buttonText: String)
+
+@import play.i18n._
+@import play.api.Play.current
+@import play.api.i18n.Messages.Implicits._
+@import helper._
+
+@main("Welcome") {
+    <h1>Minesweeper Entry</h1>
+    @form(routes.ApplicationMines.sayHi){
+        <input type="submit" text=buttonText value="Enter" />
+    }
+}
