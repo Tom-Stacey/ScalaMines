@@ -2,11 +2,10 @@ package models
 
 import scala.annotation.tailrec
 import scala.util.Random
-
 /**
   * @author tstacey
   */
-class MineSweeperGrid(rows:Int, cols:Int, numberOfMines:Int) {
+class MineSweeperGrid(val rows: Int, val cols: Int, val numberOfMines: Int) {
   def this(size:Int) = this(size, size, size.*(2))
   val grid:Array[Array[Square]] = Array.fill(rows, cols)(new Square())
 

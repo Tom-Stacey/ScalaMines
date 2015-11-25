@@ -1,5 +1,6 @@
 package controllers
 
+import models.MineSweeperGrid
 import play.api.mvc._
 
 class Application extends Controller {
@@ -21,6 +22,6 @@ class Application extends Controller {
     * @return
     */
   def minesTest = Action {
-    Ok(views.html.minefield(5,10))
+    Ok(views.html.minefield(new MineSweeperGrid(5)))
   }
 }

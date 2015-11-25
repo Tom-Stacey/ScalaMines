@@ -1,5 +1,6 @@
 package views
 
+import models.MineSweeperGrid
 import org.scalatest.{Matchers, FlatSpec}
 import play.api.test._
 import play.api.test.Helpers._
@@ -14,7 +15,11 @@ class MinefieldSpec extends FlatSpec with Matchers{
 
     val rows = 5
     val cols = 10
-    lazy val html = views.html.minefield(rows,cols)
+
+    val minefield = new MineSweeperGrid(rows)
+
+    //lazy val html = views.html.minefield(rows,cols)
+    lazy val html = views.html.minefield(minefield)
 
     "The minefield view" should "render an html page" in{
       new FakeApplication(){
@@ -35,12 +40,12 @@ class MinefieldSpec extends FlatSpec with Matchers{
 
     it should "have at given number of table rows" in {
       contentAsString(html) should include ("<tr id=\"1\">")
-      contentAsString(html) should include ("<tr id=\"" +rows+ "\">")
+      contentAsString(html) should include ("<tr id=\"" +minefield.rows+ "\">")
     }
 
     it should "have a given number of table cells per row" in {
       contentAsString(html) should include ("<td id=\"1\">")
-      contentAsString(html) should include ("<td id=\"" +cols+ "\">")
+      contentAsString(html) should include ("<td id=\"" +minefield.rows+ "\">")
     }
 
   }
