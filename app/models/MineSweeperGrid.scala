@@ -7,9 +7,10 @@ import scala.util.Random
   */
 class MineSweeperGrid(val rows: Int, val cols: Int, val numberOfMines: Int) {
   def this(size:Int) = this(size, size, size.*(2))
-  val grid:Array[Array[Square]] = Array.fill(rows, cols)(new Square())
+  var grid:Array[Array[Square]] = Array.fill(rows, cols)(new Square())
 
   def makeInitialGrid():Array[Array[Square]] = {
+    //println("makeInitialGrid Called")
     placeMines()
     setSurroundingValues()
     grid;
@@ -20,17 +21,24 @@ class MineSweeperGrid(val rows: Int, val cols: Int, val numberOfMines: Int) {
     */
   def placeMines():Unit = {
 
-    @tailrec
+    //println("placeMines Called")
     def loop(minesPlaced:Int):Unit = {
       val rowCoord = Random.nextInt(rows)
       val colCoord = Random.nextInt(cols)
+      //Thread.sleep(500)
+      //println("Mines placed: "+minesPlaced)
       if(minesPlaced == numberOfMines) {
+        //println("end")
         // END LOOP
-      } else if(grid(rowCoord)(colCoord).containsMine) {
-        loop(minesPlaced)
       } else {
-        grid(rowCoord)(colCoord) = grid(rowCoord)(colCoord).copy(containsMine = true)
-        loop(minesPlaced.+(1))
+        if (grid(rowCoord)(colCoord).containsMine) {
+          //println("contains mine. Mines placed: "+minesPlaced)
+          loop(minesPlaced)
+        } else {
+          grid(rowCoord)(colCoord) = grid(rowCoord)(colCoord).copy(containsMine = true)
+          //println("Mine placed! Mines placed: "+minesPlaced)
+          loop(minesPlaced.+(1))
+        }
       }
     }
 
@@ -42,6 +50,7 @@ class MineSweeperGrid(val rows: Int, val cols: Int, val numberOfMines: Int) {
     */
   def setSurroundingValues():Unit = {
 
+    //println("setSurroundingValues Called")
     @tailrec
     def loop(row:Int, col:Int):Unit = {
       grid(row)(col) = grid(row)(col).copy(surroundingMines = Option(calculateSurroundingMines(row, col)))

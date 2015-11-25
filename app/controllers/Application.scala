@@ -22,6 +22,8 @@ class Application extends Controller {
     * @return
     */
   def minesTest = Action {
-    Ok(views.html.minefield(new MineSweeperGrid(5)))
+    val grid = new MineSweeperGrid(10)
+    grid.makeInitialGrid()
+    Ok(views.html.minefield(grid))
   }
 }
